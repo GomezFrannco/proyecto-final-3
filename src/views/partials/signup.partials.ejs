@@ -1,0 +1,32 @@
+<h1>Create an account</h1>
+<hr>
+<h4 style="color: red"><%- failed -%></h4>
+<form action="/signup" enctype="multipart/form-data" method="POST" >
+  <label for="email">Email</label>
+  <input type="email" name="email" placeholder="Type your Email address">
+  
+  <label for="password">Password</label>
+  <input type="password" name="password" placeholder="Type your password">
+  
+  <label for="confirmed">Confirm your password</label>
+  <input type="password" name="confirmed" placeholder="Confirm your password">
+  
+  <label for="name">Name</label>
+  <input type="text" name="username" placeholder="Type your name">
+  
+  <label for="age">Age</label>
+  <input type="number" name="age" placeholder="Type your age">
+  
+  <label for="adress">Adress</label>
+  <input type="text" name="adress" placeholder="Type your adress">
+  
+  <label for="phone">Phone number</label>
+  <input type="number" name="phone" placeholder="Type your phone number">
+  
+  <label for="uploaded_file">Photo</label>
+  <input type="file" name="uploaded_file" accept=".jpg, .png, .jpeg">
+  
+  <input type="submit" value="Sign Up">
+</form>
+<hr>
+<p>Already have an account? <a href="/login">Sign in</a></p>
