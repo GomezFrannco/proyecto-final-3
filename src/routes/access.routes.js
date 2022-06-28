@@ -12,7 +12,7 @@ router.route("/login")
 
 router.route("/signup")
   .get(get.signup)
-  .post(upload.single("uploaded_file"), passportSignup.authenticate('signup', { failureRedirect: '/fail/signup' }), post.signup);
+  .post(upload.single("picture"), passportSignup.authenticate('signup', { failureRedirect: '/fail/signup' }), post.signup);
 
 router.route("/logout")
   .get(get.logout);

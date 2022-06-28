@@ -23,6 +23,7 @@ passport.use(
             age: req.body.age,
             adress: req.body.adress,
             phone: req.body.phone,
+            picture: `${req.file ? 'uploads/' + req.file.filename : 'uploads/default-image.png'}`
           };
           const saveNewUser = await userModel.create(newUser);
           return done(null, saveNewUser);
