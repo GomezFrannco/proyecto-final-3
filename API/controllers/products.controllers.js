@@ -12,9 +12,21 @@ async function readProduct(req, res) {
   res.json({ findProduct });
 }
 
+async function allProducts(_req, res) {
+  const productsList = await productsDao.readAll();
+  res.json(productsList);
+}
+
+async function updateProduct(req, res) {
+  const { id } = req.params;
+  const update = req.body;
+  const newProduct = await productsDao.updateOne({ name: id }, update);
+  res.json({ newProduct });
+}
+
 async function deleteProduct(req, res) {
   const { id } = req.params;
-  const deleteProduct = await productsDao.deleteOne({ id: id });
+  const deleteProduct = await productsDao.deleteOne({ name: id });
   res.json({ deleteProduct });
 }
 
@@ -22,6 +34,8 @@ module.exports = {
   products: {
     save: createProduct,
     find: readProduct,
+    findAll: allProducts,
+    update: updateProduct,
     delete: deleteProduct,
   },
 };

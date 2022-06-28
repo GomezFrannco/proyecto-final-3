@@ -1,1 +1,18 @@
 <h1>EXPLORE NEW AND POPULAR PRODUCTS</h1>
+
+<% if (products.length > 0) { %>
+  <table>
+    <tr>
+      <th>title</th>
+      <th>price</th>
+      <th>thumbnail</th>
+    </tr>
+    <% for (const i of products) { %>
+      <tr>
+        <td><%- i.title %></td>
+        <td><%- i.price %></td>
+        <td><%- i.thumbnail %></td>
+      </tr>
+      <% } %>
+  </table>
+<% } %>

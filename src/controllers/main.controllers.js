@@ -1,6 +1,13 @@
-function getMain(_req, res) {
+const fetch = require("node-fetch");
+
+async function getMain(_req, res) {
+  const request = await fetch("http://localhost:8080/api/products", {
+    method: "GET",
+  });
+  const response = await request.json();
   res.status(200).render("pages/home.pages.ejs", {
     partial: "main.partials.ejs",
+    products: response,
   });
 }
 
@@ -11,8 +18,7 @@ function getAccount(req, res) {
     adress: req.user.adress,
     phone: req.user.phone,
     picture: req.user.picture,
-  }
-
+  };
   res.status(200).render("pages/home.pages.ejs", {
     partial: "account.partials.ejs",
     avatar: user.picture,

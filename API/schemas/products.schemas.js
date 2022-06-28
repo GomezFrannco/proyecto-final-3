@@ -1,12 +1,7 @@
 const mongoose = require("mongoose");
 
 const product_schema = new mongoose.Schema({
-  // id: {
-  //   type: Number,
-  //   default: 1,
-  //   required: true,
-  // },
-  name: {
+  title: {
     type: String,
     required: true,
     max: 50,
@@ -21,10 +16,10 @@ const product_schema = new mongoose.Schema({
     required: true,
     max: 50,
   },
-  // picture: {
-  //   type: String,
-  //   required: true,
-  // },
+  thumbnail: {
+    type: String,
+    required: true,
+  },
   price: {
     type: Number,
     required: true,
