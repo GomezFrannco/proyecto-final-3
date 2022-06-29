@@ -1,3 +1,5 @@
+const { cartDao } = require('../../API/models/cart.models.js')
+
 // =================LOGIN====================
 async function getLogin(_req, res) {
   return res.status(200).render("pages/access.pages.ejs", {
@@ -28,7 +30,8 @@ async function getSignup(_req, res) {
     partial: "signup.partials.ejs",
   });
 }
-async function postSignup(_req, res) {
+async function postSignup(req, res) {
+  cartDao.create({owner: req.user.name});
   return res.status(200).redirect("/login");
 }
 

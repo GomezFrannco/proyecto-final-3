@@ -1,4 +1,10 @@
-<p>Cart(0)</p>
+<p>Cart(<%= cart %>)</p>
 <p>Saved(0)</p>
 
-<h3>Cart is empty</h3>
+
+<% if (cart > 0) { %>
+  <h3>Cart have <%= cart %> products</h3>
+<% } else { %>
+    <h3>Cart is empty!</h3>
+    <p>You can add some products on the <a href="/main">main page</a></p>
+<% } %>  

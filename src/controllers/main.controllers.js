@@ -1,4 +1,5 @@
 const fetch = require("node-fetch");
+const { cartDao } = require('../../API/models/cart.models.js')
 
 async function getMain(_req, res) {
   const request = await fetch("http://localhost:8080/api/products", {
@@ -25,9 +26,12 @@ function getAccount(req, res) {
   });
 }
 
-function getCart(_req, res) {
+async function getCart(req, res) {
+  const cart = await cartDao.readOne({owner: req.user.name });
+  const itemsIn = await cart.products.length;
   res.status(200).render("pages/home.pages.ejs", {
     partial: "cart.partials.ejs",
+    cart: itemsIn,
   });
 }
 
