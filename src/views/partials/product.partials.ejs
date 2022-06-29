@@ -1,0 +1,18 @@
+<% if (products.length > 0) { %>
+  <% for (let i = 0; i < products.length; i++) { %>
+    <div style="display: inline-block">
+      <h4><%- products[i].title %></h4>
+      <hr>
+      <img src="" alt="<%= products[i].thumbnail %>">
+      <h4>price: $<%- products[i].price %></h4>
+      <p>stock: <%- products[i].stock %></p>
+      <button onclick="add('<%= products[i]._id %>')">Add to cart</button>
+    </div>  
+  <% } %>
+<% } %>
+
+<script>
+  function add(e) {
+    fetch(`/api/cart/id/${e}`, {method: 'post' })
+  }      
+</script>
