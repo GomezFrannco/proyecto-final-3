@@ -1,8 +1,33 @@
-<img src="<%= 'http://localhost:8080/' + avatar %>" alt="avatar">
-
+<hr>
+<h2>My Data:</h2>
 <ul>
-  <li>My data</li>
-  <li>Security</li>
-  <li>Payment (soon)</li>
-  <li>Privacy (soon)</li>
+  <li>
+    photo:
+    <img src="<%= 'http://localhost:8080/' + avatar %>" style="width:150px" alt="avatar">
+  </li>
+  <li>
+    <p>name: <%= username %></p>
+  </li>
+  <li>
+    <p>age: <%= age %></p>
+  </li>
+  <li>
+    <p>adress: <%= adress %></p>
+  </li>
+  <li>
+    <p>phone: <%= phone %></p>
+  </li>
 </ul>
+<hr>
+<h2>Security</h2>
+<form action="" method="POST">
+  <label for="password">Change your password</label>
+  <input type="password" name="password" placeholder="Type your new password">
+  <label for="newPass">Repeat your new password</label>
+  <input type="password" name="newPass" placeholder="Type your new password again">
+  <input type="submit" value="Send">
+</form>
+<hr>
+<h2>Payment (soon)</h2>
+<hr>
+<h2>Privacy (soon)</h2>

@@ -13,16 +13,13 @@ async function getMain(_req, res) {
 }
 
 function getAccount(req, res) {
-  const user = {
-    name: req.user.name,
+  res.status(200).render("pages/home.pages.ejs", {
+    partial: "account.partials.ejs",
+    avatar: req.user.picture,
+    username: req.user.name,
     age: req.user.age,
     adress: req.user.adress,
     phone: req.user.phone,
-    picture: req.user.picture,
-  };
-  res.status(200).render("pages/home.pages.ejs", {
-    partial: "account.partials.ejs",
-    avatar: user.picture,
   });
 }
 
