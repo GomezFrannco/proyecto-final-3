@@ -15,24 +15,15 @@ const Schema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  products: [product_schema],
+  products: [
+    {
+      type: product_schema,
+      ref: "Products",
+    },
+  ],
 });
 
-const cartModel = mongoose.model("Carts", Schema);
-
-// How to add a product into a cart
-
-// const cart = new cartModel();
-// cart.products.create({
-//   id,
-//   timestamp,
-//   name,
-//   description,
-//   code,
-//   picture,
-//   price,
-//   stock
-// })
+const cartModel = mongoose.model("Carritos", Schema);
 
 module.exports = {
   cartModel,
