@@ -1,6 +1,6 @@
 <% if (products.length > 0) { %>
   <% for (let i = 0; i < products.length; i++) { %>
-    <div style="display: inline-block">
+    <div class="product__card">
       <h4><%- products[i].title %></h4>
       <hr>
       <img src="" alt="<%= products[i].thumbnail %>">
@@ -13,6 +13,6 @@
 
 <script>
   function add(e) {
-    fetch(`/api/cart/id/${e}`, {method: 'post' })
+    fetch(`/api/cart/id/${e}`, { method: 'post' })
   }      
 </script>
