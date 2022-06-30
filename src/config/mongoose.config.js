@@ -1,15 +1,16 @@
 const mongoose = require("mongoose");
-require('./dotenv.config.js')
+const { log } = require("../utils/logs.utils.js");
+require("./dotenv.config.js");
 
 async function connect(url) {
   return await mongoose.connect(url, (err) => {
-    !err
-      ? console.log({
-          message: "Connected with MongoDB",
-        })
-      : console.error({
-          message: err.message,
-        });
+    if (!err) {
+      log.console.info("💾 connected with Mongo");
+      log.file.info("💾 connected with Mongo");
+    } else {
+      log.console.error(err.message);
+      log.file.error(err.message);
+    }
   });
 }
 

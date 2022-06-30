@@ -5,6 +5,7 @@ const accessRoutes = require("./routes/access.routes.js");
 const mainRoutes = require("./routes/main.routes.js");
 const apiRoutes = require("../API/routes/api.routes.js");
 const passport = require("passport");
+const { log } = require('./utils/logs.utils.js')
 
 class App {
   constructor(port) {
@@ -34,7 +35,8 @@ class App {
   }
   listen() {
     this.app.listen(this.app.get("port"), () => {
-      console.log("🚀 listening on port:", Number(this.app.get("port")));
+      log.console.info(`🚀 listening on port: ${this.app.get('port')}`);
+      log.file.info(`🚀 listening on port: ${this.app.get('port')}`);
     });
   }
 }

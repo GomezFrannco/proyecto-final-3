@@ -3,6 +3,7 @@ const passport = require("passport");
 const bcrypt = require("bcrypt");
 const { userModel } = require("../models/user.models.js");
 const init = require("../utils/passport.utils.js");
+const { log } = require('../utils/logs.utils.js');
 
 passport.use(
   "signup",
@@ -29,9 +30,8 @@ passport.use(
           return done(null, saveNewUser);
         }
       } catch (err) {
-        console.log({
-          message: err.message,
-        });
+        log.console.error(err.message);
+        log.file.error(err.message);
       }
       return done(null, false);
     }
