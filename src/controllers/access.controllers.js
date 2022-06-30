@@ -1,4 +1,5 @@
-const { cartDao } = require('../../API/models/cart.models.js')
+const { cartDao } = require("../../API/models/cart.models.js");
+const { sendMail } = require("../utils/mail.utils.js");
 
 // =================LOGIN====================
 async function getLogin(_req, res) {
@@ -31,7 +32,18 @@ async function getSignup(_req, res) {
   });
 }
 async function postSignup(req, res) {
-  cartDao.create({owner: req.user.name});
+  cartDao.create({ owner: req.user.name });
+  const user = 
+  `<h1>${req.user.name} is now registered</h1>
+   <h2>User data:</h2>
+    <ul>
+      <li><p>email: ${req.user.email}</p></li>
+      <li><p>name: ${req.user.name}</p></li>
+      <li><p>age: ${req.user.age}</p></li>
+      <li><p>adress: ${req.user.adress}</p></li>
+      <li><p>phone: ${req.user.phone}</p></li>
+    </ul>`
+  sendMail(user);
   return res.status(200).redirect("/login");
 }
 
@@ -45,8 +57,8 @@ async function failSignup(_req, res) {
 
 // ================LOGOUT====================
 async function getLogout(req, res) {
-  req.logout({}, (err)=>{
-    res.send(err)
+  req.logout({}, (err) => {
+    res.send(err);
   });
   res.status(200).redirect("/login");
 }
