@@ -25,10 +25,11 @@ function getAccount(req, res) {
 
 async function getCart(req, res) {
   const cart = await cartDao.readOne({owner: req.user.name });
-  const itemsIn = await cart.products.length;
+  const itemsQ = await cart.products.length;
   res.status(200).render("pages/home.pages.ejs", {
     partial: "cart.partials.ejs",
-    cart: itemsIn,
+    cart: itemsQ,
+    itemsIn: cart.products
   });
 }
 

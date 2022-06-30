@@ -1,10 +1,31 @@
-<p>Cart(<%= cart %>)</p>
-<p>Saved(0)</p>
-
-
+<ul>
+  <li>Cart(<%= cart %>)</li>
+  <li>Saved(0)</li>
+</ul>
+<hr>
 <% if (cart > 0) { %>
-  <h3>Cart have <%= cart %> products</h3>
+    <h3>Products in your cart:</h3>
+  <% for (let i = 0; i < itemsIn.length; i++) { %>
+    <div class="product__card">
+      <h4><%- itemsIn[i].title %></h4>
+      <hr>
+      <img src="" alt="<%= itemsIn[i].thumbnail %>">
+      <h4>price: $<%- itemsIn[i].price %></h4>
+      <p>stock: <%- itemsIn[i].stock %></p>
+      <button onclick="remove('<%= itemsIn[i]._id %>')">Remove</button>
+    </div>
+  <% } %>
+  <div>
+    <button>Buy cart</button>
+  </div>
 <% } else { %>
     <h3>Cart is empty!</h3>
     <p>You can add some products on the <a href="/main">main page</a></p>
-<% } %>  
+<% } %>
+
+<script>
+  function remove(e) {
+    let url = `/api/cart/id/${e}`
+    fetch(url, { method: 'put' })
+  }
+</script>
