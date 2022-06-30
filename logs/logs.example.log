@@ -1,0 +1,8 @@
+[2022-06-29T20:49:25.386] [INFO] fileLog - 🚀 listening on port: 8080
+[2022-06-29T20:49:26.224] [INFO] fileLog - 💾 connected with Mongo
+[2022-06-29T23:03:35.419] [INFO] fileLog - 🚀 listening on port: 8080
+[2022-06-29T23:03:36.093] [INFO] fileLog - 💾 connected with Mongo
+[2022-06-29T23:14:12.880] [INFO] fileLog - 🚀 listening on port: 8080
+[2022-06-29T23:14:28.057] [ERROR] fileLog - querySrv ETIMEOUT _mongodb._tcp.cluster0.8kpsl.mongodb.net
+[2022-06-29T23:54:35.313] [INFO] fileLog - 🚀 listening on port: 8080
+[2022-06-29T23:54:39.974] [INFO] fileLog - 💾 connected with Mongo
