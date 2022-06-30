@@ -13,6 +13,7 @@
 
 <script>
   function add(e) {
+    alert('Added')
     fetch(`/api/cart/id/${e}`, { method: 'post' })
   }      
 </script>
