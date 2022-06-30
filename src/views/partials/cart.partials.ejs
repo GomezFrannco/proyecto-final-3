@@ -16,7 +16,7 @@
     </div>
   <% } %>
   <div>
-    <button>Buy cart</button>
+    <button onclick="buyCart()">Buy cart</button>
   </div>
 <% } else { %>
     <h3>Cart is empty!</h3>
@@ -24,8 +24,36 @@
 <% } %>
 
 <script>
-  function remove(e) {
+  async function remove(e) {
+    alert('removed')
     let url = `/api/cart/id/${e}`
-    fetch(url, { method: 'put' })
+    await fetch(url, { method: 'put' });
+  }
+</script>
+
+<div id="checkout" class="checkout__card visibility">
+  <div class="card__order">
+    <h3>Do you want to buy this?</h3>
+    <% let initial = 0 %>
+    <% for (let i = 0; i < itemsIn.length; i++) { %>
+      <% const currentPrice = itemsIn[i].price %>
+      <% initial = initial + currentPrice %>
+      <p><b>Product:</b> <%= itemsIn[i].title %> ............ <b>$<%- itemsIn[i].price %></b></p>
+      <% } %>
+      <hr>
+      <p><b>Total: $<%= initial %></b></p>
+      <div>
+        <button onclick="confirmed()">Confirm</button>
+        <button onclick="goBack()">Go back</button>
+      </div>
+  </div>
+</div>
+
+<script>
+  function confirmed() {
+    let url = '/api/cart/id/purchase'
+    fetch(url, { method: 'put'})
+    alert(`Thank you for your purchase`);
+    window.location = '/main'
   }
 </script>
