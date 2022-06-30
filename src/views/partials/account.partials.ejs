@@ -2,30 +2,30 @@
 <h2>My Data:</h2>
 <ul>
   <li>
-    photo:
+    <b>photo:</b>
     <img src="<%= 'http://localhost:8080/' + avatar %>" style="width:150px" alt="avatar">
   </li>
   <li>
-    <p>name: <%= username %></p>
+    <p><b>name:</b> <%= username %></p>
   </li>
   <li>
-    <p>age: <%= age %></p>
+    <p><b>age:</b> <%= age %></p>
   </li>
   <li>
-    <p>adress: <%= adress %></p>
+    <p><b>adress:</b> <%= adress %></p>
   </li>
   <li>
-    <p>phone: <%= phone %></p>
+    <p><b>phone:</b> <%= phone %></p>
   </li>
 </ul>
 <hr>
 <h2>Security</h2>
-<form action="" method="POST">
+<form class="access__form" style="width:40%;"action="" method="POST">
   <label for="password">Change your password</label>
   <input type="password" name="password" placeholder="Type your new password">
   <label for="newPass">Repeat your new password</label>
   <input type="password" name="newPass" placeholder="Type your new password again">
-  <input type="submit" value="Send">
+  <input type="submit" value="Send" class="button" style="width:40%;">
 </form>
 <hr>
 <h2>Payment (soon)</h2>
