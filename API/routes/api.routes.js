@@ -14,6 +14,8 @@ router.route("/products/id/:id")
   .delete(products.delete)
 
 router.route("/cart/id/:id")
-  .post(carts.add);
+  .post(carts.add)
+  .put(carts.remove)
+
 
 module.exports = router;
