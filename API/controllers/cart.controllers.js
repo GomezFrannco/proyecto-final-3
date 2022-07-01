@@ -1,6 +1,8 @@
 const { cartDao } = require("../models/cart.models.js");
 const { productsDao } = require("../models/products.models.js");
 const { sendMail } =  require("../utils/mail.utils.js");
+const { sendWP } = require('../../src/utils/twilio.utils.js')
+require('../../src/config/dotenv.config.js')
 
 async function addProduct(req, _res) {
   const { id } = req.params;
@@ -20,15 +22,21 @@ async function removeProduct(req, _res) {
     cart.products.pull(product._id);
     const removed = await cartDao.updateOne({ owner: name }, cart);
   } else {
-    let order = `<h1>${name}'s order:</h1>`
+    let order = `${name}'s order:\n=================\n`
     let initial = 0
     for (const i of cart.products) {
       const currentPrice = i.price;
       initial = initial + currentPrice;
-      order += `<div style="padding:25px; border:1px solid black;"><h3>Product: ${i.title}</h3>`
-      order += `<h3>Price: $${i.price}</h3></div>`
+      order += `Product: ${i.title}\n`
+      order += `Price: $${i.price}\n=================\n`
     }
-    order+= `<div style="padding:25px; border:1px solid black;"><h3>Total: $${initial}</h3></div>`
+    order+= `\nTotal: $${initial}`
+    const msg = {
+      body: order,
+      from: process.env.TWILIO_WP,
+      to: `whatsapp:${process.env.ADMIN_PHONE}`,
+    }
+    sendWP(msg)
     sendMail(order, name)
     cart.products = [];
     const removed = await cartDao.updateOne({ owner: name }, cart);
