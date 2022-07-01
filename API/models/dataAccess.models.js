@@ -1,3 +1,5 @@
+const { log } = require('../../src/utils/logs.utils.js')
+
 class Access {
   constructor(Schema) {
     this.schema = Schema;
@@ -12,7 +14,8 @@ class Access {
         message: "Successfully saved",
       };
     } catch (error) {
-      console.error({ message: error });
+      log.console(error.message);
+      log.file(error.message);
     }
   }
 
@@ -21,7 +24,8 @@ class Access {
       const res = await this.schema.find(filter);
       return await res;
     } catch (error) {
-      console.error({ message: error });
+      log.console(error.message);
+      log.file(error.message);
     }
   }
 
@@ -30,7 +34,8 @@ class Access {
       const res = await this.schema.findOne(filter);
       return await res;
     } catch (error) {
-      console.error({ message: error });
+      log.console(error.message);
+      log.file(error.message);
     }
   }
 
@@ -41,7 +46,8 @@ class Access {
         message: "Successfully updated",
       };
     } catch (error) {
-      console.error({ message: error });
+      log.console(error.message);
+      log.file(error.message);
     }
   }
   async updateOne(filter, update) {
@@ -51,7 +57,8 @@ class Access {
         message: "Successfully updated",
       };
     } catch (error) {
-      console.error({ message: error });
+      log.console(error.message);
+      log.file(error.message);
     }
   }
 
@@ -62,7 +69,8 @@ class Access {
         message: "Successfully deleted",
       };
     } catch (error) {
-      console.error({ message: error });
+      log.console(error.message);
+      log.file(error.message);
     }
   }
   async deleteOne(filter) {
@@ -72,7 +80,8 @@ class Access {
         message: "Successfully deleted",
       };
     } catch (error) {
-      console.error({ message: error });
+      log.console(error.message);
+      log.file(error.message);
     }
   }
 }
