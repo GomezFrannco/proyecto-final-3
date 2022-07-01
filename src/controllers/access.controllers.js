@@ -10,9 +10,7 @@ async function getLogin(_req, res) {
   });
 }
 async function postLogin(req, res) {
-  if (req.isAuthenticated()) {
-    return res.status(200).redirect("/main");
-  }
+  return res.status(200).redirect("/main");
 }
 
 async function failLogin(_req, res) {
