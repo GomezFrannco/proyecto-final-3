@@ -21,7 +21,8 @@
     "node-fetch": "^2.6.7",
     "nodemailer": "^6.7.5",
     "passport": "^0.6.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "twilio": "^3.78.0"
   },
   "devDependencies": {
     "eslint": "^8.18.0"
