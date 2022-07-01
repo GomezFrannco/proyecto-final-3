@@ -8,17 +8,17 @@ const router = express.Router();
 
 router.route("/login")
   .get(get.login)
-  .post(passportLogin.authenticate('login', { failureRedirect: '/fail/login' }), post.login);
+  .post(passportLogin.authenticate('login', { failureRedirect: '/failLogin' }), post.login);
 
 router.route("/signup")
   .get(get.signup)
-  .post(upload.single("picture"), passportSignup.authenticate('signup', { failureRedirect: '/fail/signup' }), post.signup);
+  .post(upload.single("picture"), passportSignup.authenticate('signup', { failureRedirect: '/failSignup' }), post.signup);
 
 router.route("/logout")
   .get(get.logout);
 
-router.get('/fail/login', fail.login);
-router.get('/fail/signup', fail.signup);
+router.get('/failLogin', fail.login);
+router.get('/failSignup', fail.signup);
 
 
 module.exports = router;
