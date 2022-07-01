@@ -11,10 +11,10 @@ router.get('/',(_req, res) => {
 router.route("/main")
   .get(checkAuth, get.main)
 
-router.route("/user/account")
+router.route("/account")
   .get(checkAuth, get.account)
 
-router.route("/user/cart")
+router.route("/cart")
   .get(checkAuth, get.cart)
 
 module.exports = router;

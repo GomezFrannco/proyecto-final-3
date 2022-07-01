@@ -1,8 +1,9 @@
 const fetch = require("node-fetch");
 const { cartDao } = require('../../API/models/cart.models.js')
 
-async function getMain(_req, res) {
-  const request = await fetch("http://localhost:8080/api/products", {
+async function getMain(req, res) {
+  let url = `${req.protocol}://${req.hostname}:8080/api/products`
+  const request = await fetch(url, {
     method: "GET",
   });
   const response = await request.json();
