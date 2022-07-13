@@ -6,7 +6,7 @@
       <img src="" alt="<%= products[i].thumbnail %>">
       <h4>price: $<%- products[i].price %></h4>
       <p>stock: <%- products[i].stock %></p>
-      <button onclick="add('<%= products[i]._id %>')">Add to cart</button>
+      <button onclick="add('<%= products[i].id %>')">Add to cart</button>
     </div>  
   <% } %>
 <% } %>
