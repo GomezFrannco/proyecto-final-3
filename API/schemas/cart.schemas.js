@@ -1,19 +1,15 @@
 const mongoose = require("mongoose");
+const { setDate } = require("../utils/setDate.utils.js");
 const { product_schema } = require("./products.schemas.js");
 
 const Schema = new mongoose.Schema({
-  id: {
-    type: Number,
-    default: 1,
-    required: true,
-  },
   owner: {
     type: String,
     required: true,
   },
   timestamp: {
     type: String,
-    required: true,
+    default: setDate(),
   },
   products: [
     {
