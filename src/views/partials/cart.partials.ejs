@@ -12,7 +12,7 @@
       <img src="" alt="<%= itemsIn[i].thumbnail %>">
       <h4>price: $<%- itemsIn[i].price %></h4>
       <p>stock: <%- itemsIn[i].stock %></p>
-      <button onclick="remove('<%= itemsIn[i]._id %>')">Remove</button>
+      <button onclick="remove('<%= itemsIn[i].id %>')">Remove</button>
     </div>
   <% } %>
   <div>
@@ -51,7 +51,7 @@
 
 <script>
   function confirmed() {
-    let url = '/api/cart/id/purchase'
+    let url = '/api/cart/purchase'
     fetch(url, { method: 'put'})
     alert(`Thank you for your purchase`);
     window.location = '/main'
