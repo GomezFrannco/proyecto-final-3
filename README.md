@@ -1,6 +1,9 @@
-# Tercera entrega del proyecto final
+# Tercera entrega del proyecto final (Clase 20)
 
-En esta entrega se han creado las vistas de la página, se agregaron metodos de autentificación, logs y mensajes por whatsapp y email.
+En esta entrega se ha refactorizado el código con el propósito de integrar los siguientes 2 patrones de diseño:
+
+* DAO (Data Access Object)
+* Singleton
 
 Link: https://clase-18.herokuapp.com
 
