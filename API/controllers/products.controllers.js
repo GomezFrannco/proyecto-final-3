@@ -1,41 +1,51 @@
-const { productsDao } = require("../models/products.models.js");
+const { Product } = require("../DAO/productsImpl.dao.js");
+const { setID } = require("../utils/setId.utils.js");
 
-async function createProduct(req, res) {
-  const product = req.body;
-  const saveProduct = await productsDao.create(product);
-  res.json({ saveProduct });
-}
-
-async function readProduct(req, res) {
-  const { id } = req.params;
-  const findProduct = await productsDao.readOne({ id: id });
-  res.json({ findProduct });
-}
-
-async function allProducts(_req, res) {
-  const productsList = await productsDao.readAll();
-  res.json(productsList);
-}
-
-async function updateProduct(req, res) {
-  const { id } = req.params;
-  const update = req.body;
-  const newProduct = await productsDao.updateOne({ name: id }, update);
-  res.json({ newProduct });
-}
-
-async function deleteProduct(req, res) {
-  const { id } = req.params;
-  const deleteProduct = await productsDao.deleteOne({ name: id });
-  res.json({ deleteProduct });
+class ProductController {
+  static async postProduct(req, res) {
+    const newProduct = req.body;
+    newProduct.id = await setID(Product);
+    const saveProduct = await Product.addProduct(newProduct);
+    return res.json({
+      newProduct: saveProduct,
+    });
+  }
+  static async getProducts(_req, res) {
+    const allProducts = await Product.getAll();
+    return res.json({
+      products: allProducts,
+    });
+  }
+  static async getProductById(req, res) {
+    const { id } = req.params;
+    const productFounded = await Product.getProduct(id);
+    return res.json({
+      product: productFounded,
+    });
+  }
+  static async updateProduct(req, res) {
+    const { id } = req.params;
+    const newUpdate = req.body;
+    const productUpdated = await Product.updateProduct(id, newUpdate);
+    return res.json({
+      updated: productUpdated,
+    });
+  }
+  static async deleteProduct(req, res) {
+    const { id } = req.params;
+    const productDeleted = await Product.removeProduct(id);
+    return res.json({
+      deleted: productDeleted,
+    });
+  }
 }
 
 module.exports = {
   products: {
-    save: createProduct,
-    find: readProduct,
-    findAll: allProducts,
-    update: updateProduct,
-    delete: deleteProduct,
+    save: ProductController.postProduct,
+    find: ProductController.getProductById,
+    findAll: ProductController.getProducts,
+    update: ProductController.updateProduct,
+    delete: ProductController.deleteProduct,
   },
 };

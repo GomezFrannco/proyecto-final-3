@@ -17,5 +17,7 @@ router.route("/cart/id/:id")
   .post(carts.add)
   .put(carts.remove)
 
+router.route("/cart/purchase")
+  .put(carts.purchase)
 
 module.exports = router;

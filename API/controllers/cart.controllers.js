@@ -1,51 +1,39 @@
-const { cartDao } = require("../models/cart.models.js");
-const { productsDao } = require("../models/products.models.js");
+const { Cart } = require('../DAO/cartsImpl.dao.js');
+const { Product } = require('../DAO/productsImpl.dao.js');
+const { wpp, email } = require('../utils/notification.utils.js');
 const { sendMail } =  require("../utils/mail.utils.js");
 const { sendWP } = require('../../src/utils/twilio.utils.js')
-require('../../src/config/dotenv.config.js')
 
-async function addProduct(req, _res) {
-  const { id } = req.params;
-  const { name } = req.user;
-  const cart = await cartDao.readOne({ owner: name });
-  const product = await productsDao.readOne({ _id: id });
-  cart.products.push(product);
-  const added = await cartDao.updateOne({owner: name}, cart);
-}
-
-async function removeProduct(req, _res) {
-  const { id } = req.params;
-  const { name } = req.user;
-  const cart = await cartDao.readOne({ owner: name });
-  if (id !== 'purchase') {
-    const product = await productsDao.readOne({ _id: id });
-    cart.products.pull(product._id);
-    const removed = await cartDao.updateOne({ owner: name }, cart);
-  } else {
-    let order = `${name}'s order:\n=================\n`
-    let initial = 0
-    for (const i of cart.products) {
-      const currentPrice = i.price;
-      initial = initial + currentPrice;
-      order += `Product: ${i.title}\n`
-      order += `Price: $${i.price}\n=================\n`
-    }
-    order+= `\nTotal: $${initial}`
-    const msg = {
-      body: order,
-      from: process.env.TWILIO_WP,
-      to: `whatsapp:${process.env.ADMIN_PHONE}`,
-    }
-    sendWP(msg)
-    sendMail(order, name)
-    cart.products = [];
-    const removed = await cartDao.updateOne({ owner: name }, cart);
+class CartController {
+  static async addProduct(req, _res) {
+    const userCart = await Cart.getCart(req.user.name);
+    const selectedProduct = await Product.getProduct(req.params.id);
+    userCart.products.push(selectedProduct);
+    await Cart.updateCart(req.user.name, userCart);
+  }
+  static async removeProduct(req, _res) {
+    const userCart = await Cart.getCart(req.user.name);
+    const selectedProduct = await Product.getProduct(req.params.id);
+    const itemIndex = userCart.products.findIndex((item)=> selectedProduct.id == item.id);
+    const checkQuantity = userCart.products.filter((item)=> selectedProduct.id == item.id);
+    checkQuantity.length == 1 ? userCart.products.pull(selectedProduct) : userCart.products.splice(itemIndex, 1);
+    await Cart.updateCart(req.user.name, userCart);
+  }
+  static async buyCart(req, _res) {
+    const userCart = await Cart.getCart(req.user.name);
+    const whatsappOrder = wpp(userCart, req.user.name);
+    const emailOrder = email(userCart, req.user.name);
+    sendMail(emailOrder, req.user.name);
+    sendWP(whatsappOrder);
+    userCart.products = [];
+    await Cart.updateCart(req.user.name, userCart);
   }
 }
 
 module.exports = {
   carts: {
-    add: addProduct,
-    remove: removeProduct,
+    add: CartController.addProduct,
+    remove: CartController.removeProduct,
+    purchase: CartController.buyCart,
   },
 };
