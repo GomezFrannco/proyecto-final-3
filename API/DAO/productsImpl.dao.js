@@ -10,12 +10,12 @@ class ProductDAO extends ProductInterface {
   }
   async addProduct(product) {
     try {
-      this.connection.connect();
+      await this.connection.connect();
       return await this.db.create(product);
     } catch (error) {
       console.log(error.message);
     } finally {
-      this.connection.disconnect();
+      await this.connection.disconnect();
     }
   }
   async getProduct(id) {
